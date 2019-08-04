@@ -56,7 +56,6 @@ class RedirectControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/$LINK"))
                 .andExpect(MockMvcResultMatchers.status().`is`(REDIRECT_STATUS))
                 .andExpect(MockMvcResultMatchers.redirectedUrl(REDIRECT_LINK))
-
     }
 
     val BAD_LINK = "aasdaw"
@@ -66,7 +65,6 @@ class RedirectControllerTest {
     fun testStatus404IfBadLink(){
         mockMvc.perform(MockMvcRequestBuilders.get("/$BAD_LINK"))
                 .andExpect(MockMvcResultMatchers.status().`is`(BAD_STATUS))
-
     }
 
 }
