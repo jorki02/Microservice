@@ -2,33 +2,28 @@ package ru.jorki.smlr.services
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import java.util.concurrent.ConcurrentHashMap
-import java.util.concurrent.atomic.AtomicLong
+import ru.jorki.smlr.model.Link
+import ru.jorki.smlr.model.respositories.LinkRepository
 
 @Component
 class DefaultKeyMapperService : KeyMapperService {
     @Autowired
     lateinit var converter:KeyConverterService
 
-    val sequence = AtomicLong(1000000L)
+    @Autowired
+    lateinit var linkRepo: LinkRepository
 
-    private val  map: MutableMap<Long, String>  = ConcurrentHashMap()
-
-    override fun add(link: String): String {
-        val id = sequence.getAndIncrement()
-        val key = converter.idToKey(id)
-        map[id] = link
-        return key
-    }
+    override fun add(link: String) =
+        converter.idToKey(linkRepo.save(Link(link)).id)
 
     override fun getLink(key: String): KeyMapperService.Get {
         val id = converter.keyToId(key)
-        val result = map[id]
+        val result = linkRepo.findById(id)
 
-        if(result == null){
-            return KeyMapperService.Get.NotFound(key)
+        return if(result.isPresent){
+            KeyMapperService.Get.Link(result.get().text)
         } else {
-            return KeyMapperService.Get.Link(result)
+            KeyMapperService.Get.NotFound(key)
         }
     }
 }
