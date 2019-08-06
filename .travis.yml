@@ -1,0 +1,9 @@
+language: java
+jdk: oraclejdk
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email:
+    - jorki02@gmail.com
