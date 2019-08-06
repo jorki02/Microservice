@@ -9,13 +9,16 @@ import ru.jorki.smlr.services.KeyMapperService
 import javax.servlet.http.HttpServletResponse
 
 @Controller
-@RequestMapping("/{value}")
+@RequestMapping
 class RedirectController {
 
     @Autowired
     lateinit var service: KeyMapperService
 
     @RequestMapping
+    fun home() = "home"
+
+    @RequestMapping("/{value}")
     fun redirect(@PathVariable("value") value: String, response: HttpServletResponse){
         val result = service.getLink(value)
 

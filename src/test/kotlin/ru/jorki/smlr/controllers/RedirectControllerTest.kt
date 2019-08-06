@@ -8,6 +8,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.TestPropertySource
 import org.springframework.test.context.junit4.SpringRunner
@@ -22,7 +23,7 @@ import ru.jorki.smlr.services.KeyMapperService
 
 @RunWith(SpringRunner::class)
 @WebAppConfiguration
-@ContextConfiguration(classes = [SmlrApplication::class])
+@SpringBootTest(classes = [SmlrApplication::class])
 @TestPropertySource(locations = ["classpath:database-test.properties"])
 class RedirectControllerTest {
 
@@ -67,6 +68,12 @@ class RedirectControllerTest {
     fun testStatus404IfBadLink(){
         mockMvc.perform(MockMvcRequestBuilders.get("/$BAD_LINK"))
                 .andExpect(MockMvcResultMatchers.status().`is`(BAD_STATUS))
+    }
+
+    @Test
+    fun homeWorksFine(){
+        mockMvc.perform(MockMvcRequestBuilders.get("/"))
+                .andExpect(MockMvcResultMatchers.view().name("home"))
     }
 
 }
