@@ -11,6 +11,8 @@
 	<groupId>ru.jorki</groupId>
 	<artifactId>smlr</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
 	<name>smlr</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -93,7 +95,7 @@
 	<build>
 		<sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
 		<testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
-		<finalName>smlr.jar</finalName>
+		<finalName>smlr</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -110,6 +112,22 @@
 						<plugin>spring</plugin>
 					</compilerPlugins>
 				</configuration>
+				<executions>
+					<execution>
+						<id>compile</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>test-compile</id>
+						<phase>test-compile</phase>
+						<goals>
+							<goal>test-compile</goal>
+						</goals>
+					</execution>
+				</executions>
 				<dependencies>
 					<dependency>
 						<groupId>org.jetbrains.kotlin</groupId>

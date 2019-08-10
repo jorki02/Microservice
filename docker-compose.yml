@@ -1,0 +1,23 @@
+version: '2'
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=root
+    restart: always
+  smlr:
+    image:
+      jorki02/smlr:latest
+    restart: always
+    links:
+      - db
+    ports:
+      - 80:80
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SMLR_PREFIX=http://localhost/
+      - SERVER_PORT=80
+
+

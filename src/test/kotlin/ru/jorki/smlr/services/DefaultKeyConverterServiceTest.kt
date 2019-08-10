@@ -1,9 +1,9 @@
 package ru.jorki.smlr.services
 
+import junit.framework.Assert.assertEquals
 import org.junit.Test
 import java.util.*
 import kotlin.math.abs
-import kotlin.test.assertEquals
 
 class DefaultKeyConverterServiceTest {
 

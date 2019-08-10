@@ -1,5 +1,6 @@
 package ru.jorki.smlr.services
 
+import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.InjectMocks
@@ -9,7 +10,7 @@ import org.mockito.MockitoAnnotations
 import ru.jorki.smlr.model.Link
 import ru.jorki.smlr.model.respositories.LinkRepository
 import java.util.*
-import kotlin.test.assertEquals
+
 
 class DefaultKeyMapperServiceTest {
     @InjectMocks
